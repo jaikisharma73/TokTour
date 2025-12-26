@@ -1,19 +1,11 @@
-body{
-   font-family: "Roboto", sans-serif ;
-   display: flex;
-   flex-direction: column;
-   min-height: 100vh;
-}
 .container{
     flex: 1;
 }
-
-
 .navbar{
-    height: 5rem;
+    height: 4rem;
     backdrop-filter: blur(10px);
+    background-color: transparent !important;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-
 }
 
 .fa-torii-gate{
@@ -25,8 +17,8 @@ body{
     color:#222222 !important;
 }
 
-
 /* Footer */
+
 .f-info{
     margin-top: 18px;
 }
@@ -76,17 +68,16 @@ body{
 .card-img-top{
     border-radius: 0.5rem !important;
     width: 100% !important;
-    object-fit: cover !important;
+    object-fit: fill !important;
 }
-
 .card-body{
     padding: 0;
-
+    margin-left: -15px;
 }
 .card-body
 .card-text,.card-price {
     font-weight: 300;
-     font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Card Effect  */
@@ -97,4 +88,23 @@ body{
 .card-img-overlay:hover{
     opacity: 0.2;
     background-color: white;
+}
+
+li{
+    list-style: none;
+}
+
+/* Show Page */
+
+.show-img{
+    height: 37vh;
+}
+
+.btns{
+    display: flex;
+}
+
+.show-cards{
+    padding-left: 0;
+    padding-right: 0;
 }

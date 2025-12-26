@@ -1,5 +1,4 @@
 <% layout("/layouts/boilerplate")%>
-
   <h3>All Listings</h3>
   <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
     <%for(let listing of allListings){%>
@@ -18,7 +17,14 @@
           </h5>
           <p class="card-text"><%=listing.description%></p>
           <h6 class="card-price">
-            <b>&#8377;<%= listing.price.toLocaleString("en-IN")%>/Night</b>
+            <b>
+  &#8377;
+  <%= (listing.price !== null && listing.price !== undefined)
+        ? listing.price.toLocaleString("en-IN")
+        : "N/A" %>
+  /Night
+</b>
+
           </h6>
         </div>
       </div>

@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 const listingSchema = new Schema({
   title: {
     type: String,
-    required: true,
+    
   },
   description: {
     type: String,
+    
   },
   image: {
     filename: {
@@ -22,7 +23,9 @@ const listingSchema = new Schema({
   },
   price: {
     type: Number,
+    default: 0,
   },
+
   location: {
     type: String,
   },

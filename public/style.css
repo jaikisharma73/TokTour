@@ -66,9 +66,10 @@
     text-decoration: none;
 }
 .card-img-top{
-    border-radius: 0.5rem !important;
+    border-radius: 1rem !important;
     width: 100% !important;
-    object-fit: fill !important;
+    object-fit: cover !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .card-body{
     padding: 0;
@@ -107,4 +108,39 @@ li{
 .show-cards{
     padding-left: 0;
     padding-right: 0;
+}
+
+/* Button Animations */
+.btn {
+    transition: all 0.3s ease-in-out;
+}
+
+.btns .btn-danger:hover, .btns .btn-dark:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2) !important;
+}
+
+/* Form Styles */
+.form-control {
+    border-radius: 0.5rem;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #fe424d;
+    box-shadow: 0 0 8px rgba(254, 66, 77, 0.4);
+}
+
+.form-wrapper {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 3rem;
+    border: 1px solid #f0f0f0;
+}
+
+h3 {
+    font-weight: 600;
+    color: #222222;
 }

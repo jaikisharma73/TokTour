@@ -1,36 +1,46 @@
 <% layout("/layouts/boilerplate")%>
 
-<div class="row">
-  <div class="col-8 offset-3">
-    <h3>Listing Details</h3>
-  </div>
-  <div class="card col-6 offset-3 show-cards">
-    <img
-      src="<%=listing.image.url%>"
-      class="card-img-top show-img"
-      alt="Listing Image"
-    />
-    <div class="card-body">
-      <p class="card-text"><b><%=listing.title %></b></p>
-      <li><%= listing.description %></li>
-      <li>
-        &#8377; <%= (listing.price !== null && listing.price !== undefined) ?
-        listing.price.toLocaleString("en-IN") : "N/A" %>
-      </li>
-      <li><%= listing.location %></li>
-      <li><%= listing.country %></li>
+  <div class="row mt-4">
+    <div class="col-10 offset-1">
+      <h3 class="mb-4">Listing Details</h3>
+      <div class="card show-cards form-wrapper" style="padding: 1.5rem;">
+        <div class="row g-0">
+          <div class="col-md-5 pe-md-4">
+            <img src="<%=listing.image.url%>" class="img-fluid rounded show-img" alt="Listing Image"
+              style="object-fit: cover; height: 100%; width: 100%; border-radius: 1rem !important;" />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body ps-md-4">
+              <h2 class="card-title" style="color: black; font-weight: 700; margin-bottom: 1rem;">
+                <%=listing.title %>
+              </h2>
+              <p class="card-text text-muted" style="font-size: 1.1rem; line-height: 1.6;">
+                <%= listing.description %>
+              </p>
+
+              <ul class="list-unstyled mt-4" style="font-size: 1.1rem;">
+                <li class="mb-3">
+                  <i class="fa-solid fa-indian-rupee-sign me-2"></i> <strong>Price:</strong> &#8377; <%= (listing.price
+                    !==null && listing.price !==undefined) ? listing.price.toLocaleString("en-IN") : "N/A" %> /night
+                </li>
+                <li class="mb-3"><i class="fa-solid fa-location-dot me-2"></i> <strong>Location:</strong>
+                  <%= listing.location %>
+                </li>
+                <li class="mb-3"><i class="fa-solid fa-globe me-2"></i> <strong>Country:</strong>
+                  <%= listing.country %>
+                </li>
+              </ul>
+
+              <div class="btns mt-4 pt-2 border-top">
+                <a href="/listings/<%= listing._id %>/edit" class="btn btn-danger me-3"
+                  style="padding: 0.5rem 1.5rem;">Edit</a>
+                <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
+                  <button class="btn btn-dark" style="padding: 0.5rem 1.5rem;">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <br />
-
-  <div class="btns">
-    <a
-      href="/listings/<%= listing._id %>/edit"
-      class="btn btn-danger col-1 offset-3"
-      >Edit</a
-    >
-    <form method="post" action="/listings/<%=listing._id%>?_method=DELETE">
-      <button class="btn btn-dark offset-5">Delete</button>
-    </form>
-  </div>
-</div>

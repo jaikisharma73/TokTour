@@ -7,50 +7,50 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js")
-const{listingSchema} = require("./schema.js")
+const { listingSchema } = require("./schema.js")
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
-main().then(()=>{
+main().then(() => {
     console.log("Connected To Database");
-}).catch((err)=>{
+}).catch((err) => {
     console.log(err)
 })
 
-async function main(){
+async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
-app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send("Hi i am here");
-} )
+})
 
-const validateListing = (req,res,next)=>{
-        let {error} = listingSchema.validate(req.body);
-        if(error){
-            let errMsg = error.details.map((el)=>el.message).join(",");
-            throw new ExpressError(400,errMsg);
-        }else{
-            next();
-        }
+const validateListing = (req, res, next) => {
+    let { error } = listingSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
 }
 
 //Index Route
-app.get("/listings",async(req,res)=>{
+app.get("/listings", async (req, res) => {
     const allListings = await Listing.find({});
-    res.render("listings/index.ejs",{allListings});
-    
+    res.render("listings/index.ejs", { allListings });
+
 });
 
 //New Route
-app.get("/listings/new" ,(req,res)=>{
+app.get("/listings/new", (req, res) => {
     res.render("listings/new.ejs");
 })
 
@@ -73,12 +73,12 @@ app.get("/listings/:id", async (req, res) => {
 
 
 //Create Route
-app.post("/listings",validateListing,
-    wrapAsync(async(req,res,next)=>{
+app.post("/listings", validateListing,
+    wrapAsync(async (req, res, next) => {
         const newListing = new Listing(req.body.listing);
         await newListing.save();
         res.redirect("/listings");
-}));
+    }));
 
 //Edit Route
 
@@ -98,16 +98,16 @@ app.get("/listings/:id/edit", async (req, res) => {
 
 
 //update Route
-app.put("/listings/:id",validateListing,
-    wrapAsync(async(req,res)=>{
-    let {id} = req.params;
-    await Listing.findByIdAndUpdate(id ,{...req.body.listing});
-    res.redirect(`/listings/${id}`);
-}));
+app.put("/listings/:id", validateListing,
+    wrapAsync(async (req, res) => {
+        let { id } = req.params;
+        await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+        res.redirect(`/listings/${id}`);
+    }));
 
 //Delete route
-app.delete("/listings/:id" ,async(req,res)=>{
-    let {id} = req.params;
+app.delete("/listings/:id", async (req, res) => {
+    let { id } = req.params;
     let deletedlisting = await Listing.findByIdAndDelete(id);
     console.log(deletedlisting);
     res.redirect("/listings");
@@ -131,12 +131,12 @@ app.all(/.*/, (req, res, next) => {
 });
 
 
-app.use((err,req,res,next)=>{
-    let{statusCode=500, message="Something Went Wrong!"}= err;
-    res.render("error.ejs",{err});
+app.use((err, req, res, next) => {
+    let { statusCode = 500, message = "Something Went Wrong!" } = err;
+    res.render("error.ejs", { err });
     // res.status(statusCode).send(message)
 });
 
-app.listen(8080, ()=>{
+app.listen(8080, () => {
     console.log("Server is listening to port 8080");
 });

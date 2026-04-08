@@ -4,17 +4,17 @@ const Listing = require("../models/listing.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
-main().then(()=>{
+main().then(() => {
     console.log("Connected To Database");
-}).catch((err)=>{
+}).catch((err) => {
     console.log(err)
 })
 
-async function main(){
+async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
-const initDB = async ()=>{
+const initDB = async () => {
     await Listing.deleteMany({});
     await Listing.insertMany(initData.data);
     console.log("Data was initialized");

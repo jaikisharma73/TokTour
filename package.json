@@ -16,6 +16,7 @@
     "express": "^5.2.1",
     "joi": "^18.0.2",
     "method-override": "^3.0.0",
-    "mongoose": "^9.0.1"
+    "mongodb": "^5.9.2",
+    "mongoose": "^7.8.9"
   }
 }

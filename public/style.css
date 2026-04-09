@@ -97,8 +97,16 @@ li{
 
 /* Show Page */
 
-.show-img{
-    height: auto;
+.show-img {
+    height: 35vh;
+    object-fit: cover;
+    border-radius: 1rem !important;
+}
+
+@media (min-width: 768px) {
+    .show-img {
+        height: 55vh;
+    }
 }
 
 .btns{

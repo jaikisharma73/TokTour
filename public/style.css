@@ -1,97 +1,109 @@
-.container{
+.container {
     flex: 1;
 }
-.navbar{
+
+.navbar {
     height: 4rem;
     backdrop-filter: blur(10px);
     background-color: transparent !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.fa-torii-gate{
+.fa-torii-gate {
     color: #fe424d;
     font-size: 2rem;
 }
 
-.nav-item .nav-link{
-    color:#222222 !important;
+.nav-item .nav-link {
+    color: #222222 !important;
 }
 
 /* Footer */
 
-.f-info{
+.f-info {
     margin-top: 18px;
 }
-.f-info-links a{
+
+.f-info-links a {
     text-decoration: none;
     color: #222222;
 }
-.f-info-links a:hover{
+
+.f-info-links a:hover {
     text-decoration: underline;
 }
 
-.f-info-links,.f-info-socials,.f-info-brand{
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.f-info-socials i{
-     font-size: 1.3rem;
+.f-info-socials i {
+    font-size: 1.3rem;
     margin-right: 1rem;
 }
-.f-info{
+
+.f-info {
     text-align: center;
     display: flex;
     height: 8rem;
     background-color: #ebebeb;
     flex-wrap: wrap;
     justify-content: center;
-    align-items:space-evenly;
+    align-items: space-evenly;
 }
 
 /* Cards */
 
-.card {
+.listing-card {
     margin-bottom: 1rem;
     border: none !important;
 }
-.card a{
+
+.card a {
     color: #222222;
     text-decoration: none;
 }
-.card-title a{
+
+.card-title a {
     color: #222222;
     text-decoration: none;
 }
-.card-img-top{
+
+.card-img-top {
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-.card-body{
+
+.card-body {
     padding: 0;
     margin-left: -15px;
 }
-.card-body
-.card-text,.card-price {
+
+.card-body .card-text,
+.card-price {
     font-weight: 300;
     font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Card Effect  */
 
-.card-img-overlay{
+.card-img-overlay {
     opacity: 0;
 }
-.card-img-overlay:hover{
+
+.card-img-overlay:hover {
     opacity: 0.2;
     background-color: white;
 }
 
-li{
+li {
     list-style: none;
 }
 
@@ -109,11 +121,11 @@ li{
     }
 }
 
-.btns{
+.btns {
     display: flex;
 }
 
-.show-cards{
+.show-cards {
     padding-left: 0;
     padding-right: 0;
 }
@@ -123,9 +135,10 @@ li{
     transition: all 0.3s ease-in-out;
 }
 
-.btns .btn-danger:hover, .btns .btn-dark:hover {
+.btns .btn-danger:hover,
+.btns .btn-dark:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Form Styles */
@@ -143,7 +156,7 @@ li{
     background: #ffffff;
     padding: 2.5rem;
     border-radius: 1.5rem;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
     margin-bottom: 3rem;
     border: 1px solid #f0f0f0;
 }

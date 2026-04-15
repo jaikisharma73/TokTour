@@ -127,7 +127,7 @@ app.delete("/listings/:id", async (req, res) => {
 
 // Post route
 
-app.post("/listings/:id/reviews",validateReview, wrapAsync(async (req, res) => {
+app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => {
     let listing = await Listing.findById(req.params.id);
     let newReview = new Reviews(req.body.review);
 
@@ -159,7 +159,7 @@ app.all(/.*/, (req, res, next) => {
 
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something Went Wrong!" } = err;
-    res.render("error.ejs", { err });
+    res.status(statusCode).render("error.ejs", { err });
     // res.status(statusCode).send(message)
 });
 

@@ -42,8 +42,8 @@
               <hr class="mt-4 mb-4">
               <div class="col-12 mt-4">
                 <h4 class="mb-3" style="font-weight: 700;">Leave a Review</h4>
-                <form action="/listings/<%= listing._id %>/reviews" method="POST" class="p-4 border rounded shadow-sm"
-                  style="background-color: #fafafa; border-color: #e9ecef;">
+                <form action="/listings/<%= listing._id %>/reviews" method="POST" class="p-4 border rounded needs-validation shadow-sm"
+                  style="background-color: #fafafa; border-color: #e9ecef;" novalidate>
                   <div class="mb-3">
                     <label for="rating" class="form-label" style="font-weight: 600;">Rating</label>
                     <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
@@ -52,6 +52,7 @@
                     <label for="comment" class="form-label" style="font-weight: 600;">Comments</label>
                     <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control"
                       style="resize: none;" required></textarea>
+                      <div class="invalid-feedback">Please submit some comment for review</div>
                   </div>
                   <button class="btn btn-dark mt-2 fw-semibold"
                     style="border-radius: 0.5rem; padding: 0.5rem 1.5rem;">Submit</button>

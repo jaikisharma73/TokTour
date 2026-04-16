@@ -70,7 +70,9 @@
                         </p>
                         <p class="card-text">Rating: <%= review.rating %> / 5</p>
                       </div>
-
+                      <form action="/listings/<%= listing._id %>/reviews/<% review._id %>" class="mb-2" method="post">
+                        <button class="btn btn-sm btn-dark">Delete</button>
+                      </form>
                     </div>
                     <% } %>
                 </div>

@@ -10,6 +10,8 @@ const ExpressError = require("./utils/ExpressError.js")
 const { listingSchema, reviewSchema } = require("./schema.js")
 const Reviews = require("./models/review.js");
 
+const listings = require("./routes/listing.js");
+
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
 main().then(() => {
@@ -34,15 +36,7 @@ app.get("/", (req, res) => {
     res.send("Hi i am here");
 })
 
-const validateListing = (req, res, next) => {
-    let { error } = listingSchema.validate(req.body);
-    if (error) {
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else {
-        next();
-    }
-}
+
 const validateReview = (req, res, next) => {
     let { error } = reviewSchema.validate(req.body);
     if (error) {
@@ -53,76 +47,7 @@ const validateReview = (req, res, next) => {
     }
 }
 
-//Index Route
-app.get("/listings", async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
-
-});
-
-//New Route
-app.get("/listings/new", (req, res) => {
-    res.render("listings/new.ejs");
-})
-
-//Show Route
-
-app.get("/listings/:id", async (req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).send("Listing not found");
-    }
-
-    const listing = await Listing.findById(id).populate("reviews");
-
-    if (!listing) {
-        return res.status(404).send("Listing not found");
-    }
-
-    res.render("listings/show.ejs", { listing });
-});
-
-
-//Create Route
-app.post("/listings", validateListing,
-    wrapAsync(async (req, res, next) => {
-        const newListing = new Listing(req.body.listing);
-        await newListing.save();
-        res.redirect("/listings");
-    }));
-
-//Edit Route
-
-app.get("/listings/:id/edit", async (req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).send("Invalid listing ID");
-    }
-
-    const listing = await Listing.findById(id);
-
-    if (!listing) {
-        return res.status(404).send("Listing not found");
-    }
-    res.render("listings/edit.ejs", { listing });
-});
-
-
-//update Route
-app.put("/listings/:id", validateListing,
-    wrapAsync(async (req, res) => {
-        let { id } = req.params;
-        await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-        res.redirect(`/listings/${id}`);
-    }));
-
-//Delete route
-app.delete("/listings/:id", async (req, res) => {
-    let { id } = req.params;
-    let deletedlisting = await Listing.findByIdAndDelete(id);
-    console.log(deletedlisting);
-    res.redirect("/listings");
-})
+app.use("/listings", listings);
 
 // Reviews
 
@@ -143,13 +68,13 @@ app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => 
 
 //Delete review
 
-app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
-        let {id , reviewId} = req.params;
+app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req, res) => {
+    let { id, reviewId } = req.params;
 
-        await Listing.findByIdAndUpdate(id, {$pull: {reviews : reviewId}});
-        await Reviews.findByIdAndDelete(reviewId);
+    await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Reviews.findByIdAndDelete(reviewId);
 
-        res.redirect(`/listings/${id}`);
+    res.redirect(`/listings/${id}`);
 }))
 
 

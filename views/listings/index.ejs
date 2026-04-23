@@ -1,31 +1,32 @@
 <% layout("/layouts/boilerplate")%>
-  <h3 class="col-8 offset-1 mt-4 mb-4" style="color: #222222; font-weight: 700;">Explore Our Top Listings</h3>
-  <div style="justify-content: center; display: flex;" class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
-    <%for(let listing of allListings){%>
-      <div class="card listing-card" style="width: 17rem">
-        <a href="/listings/<%= listing._id %>">
-          <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing_image" style="height: 17rem" />
-          <div class="card-img-overlay"></div>
-          <div class="card-body">
-            <h5 class="card-title">
-              <a href="/listings/<%= listing._id %>">
-                <%= listing.title%>
-              </a>
-            </h5>
-            <p class="card-text">
-              <%=listing.description%>
-            </p>
-            <h6 class="card-price">
-              <b>
-                &#8377;
-                <%= (listing.price !==null && listing.price !==undefined) ? listing.price.toLocaleString("en-IN")
-                  : "N/A" %>
-                  /Night
-              </b>
 
-            </h6>
+<div class="pro-index-container">
+  <h1 class="pro-page-title">Explore Our Top Listings</h1>
+  
+  <div class="pro-grid">
+    <% for(let listing of allListings) { %>
+      <div class="pro-card">
+        <a href="/listings/<%= listing._id %>" class="pro-card-link"></a>
+        
+        <div class="pro-card-img-wrapper">
+          <img src="<%= listing.image.url %>" class="pro-card-img" alt="Listing Image" />
+          <div class="pro-card-overlay"></div>
+        </div>
+        
+        <div class="pro-card-body">
+          <h5 class="pro-card-title"><%= listing.title %></h5>
+          <p class="pro-card-desc"><%= listing.description %></p>
+          
+          <div class="pro-card-footer">
+            <div class="pro-card-price">
+              &#8377; <%= (listing.price !==null && listing.price !==undefined) ? listing.price.toLocaleString("en-IN") : "N/A" %> <span>/Night</span>
+            </div>
+            <div style="color: #1a1a2e; font-size: 0.9rem; font-weight: 600;">
+              View Details <i class="fa-solid fa-arrow-right ms-1" style="color: #fe424d;"></i>
+            </div>
           </div>
+        </div>
       </div>
-      <%}%>
-        </a>
+    <% } %>
   </div>
+</div>

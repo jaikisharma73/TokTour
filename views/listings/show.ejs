@@ -1,84 +1,99 @@
 <% layout("/layouts/boilerplate")%>
 
-  <div class="row mt-4">
-    <div class="col-10 offset-1">
-      <h3 class="mb-4">
-        <%=listing.title %>
-      </h3>
-      <div class="card show-cards form-wrapper listing-card" style="padding: 1.5rem;">
-        <div class="row g-0">
-          <div class="col-md-5 pe-md-4 mb-4 mb-md-0">
-            <img src="<%=listing.image.url%>" class="img-fluid rounded show-img w-100" alt="Listing Image" />
-          </div>
-          <div class="col-md-7">
-            <div class="card-body ps-md-4">
-              <h2 class="card-title" style="color: black; font-weight: 700; margin-bottom: 1rem;">
-                <%=listing.title %>
-              </h2>
-              <p class="card-text text-muted" style="font-size: 1.1rem; line-height: 1.6;">
-                <%= listing.description %>
-              </p>
+<div class="pro-listing-container">
+    <div class="pro-header">
+        <h1 class="pro-title"><%= listing.title %></h1>
+    </div>
 
-              <ul class="list-unstyled mt-4" style="font-size: 1.1rem;">
-                <li class="mb-3">
-                  <i class="fa-solid fa-indian-rupee-sign me-2"></i> <strong>Price:</strong> &#8377; <%= (listing.price
-                    !==null && listing.price !==undefined) ? listing.price.toLocaleString("en-IN") : "N/A" %> /night
-                </li>
-                <li class="mb-3"><i class="fa-solid fa-location-dot me-2"></i> <strong>Location:</strong>
-                  <%= listing.location %>
-                </li>
-                <li class="mb-3"><i class="fa-solid fa-globe me-2"></i> <strong>Country:</strong>
-                  <%= listing.country %>
-                </li>
-              </ul>
+    <div class="pro-image-wrapper">
+        <img src="<%= listing.image.url %>" class="pro-image" alt="Listing Image">
+    </div>
 
-              <div class="btns mt-4 pt-2 border-top">
-                <a href="/listings/<%= listing._id %>/edit" class="btn btn-danger me-3"
-                  style="padding: 0.5rem 1.5rem;">Edit</a>
-                <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
-                  <button class="btn btn-dark" style="padding: 0.5rem 1.5rem;">Delete</button>
-                </form>
-              </div>
-              <hr class="mt-4 mb-4">
-              <div class="col-12 mt-4">
-                <h4 class="mb-3" style="font-weight: 700;">Leave a Review</h4>
-                <form action="/listings/<%= listing._id %>/reviews" method="POST"
-                  class="p-4 border rounded needs-validation shadow-sm"
-                  style="background-color: #fafafa; border-color: #e9ecef;" novalidate>
-                  <div class="mb-3">
-                    <label for="rating" class="form-label" style="font-weight: 600;">Rating</label>
-                    <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
-                  </div>
-                  <div class="mb-3">
-                    <label for="comment" class="form-label" style="font-weight: 600;">Comments</label>
-                    <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control"
-                      style="resize: none;" required></textarea>
-                    <div class="invalid-feedback">Please submit some comment for review</div>
-                  </div>
-                  <button class="btn btn-dark mt-2 fw-semibold"
-                    style="border-radius: 0.5rem; padding: 0.5rem 1.5rem;">Submit</button>
-                </form>
-                <hr>
-                <h4>All Reviews</h4>
-                <div class="row">
-                  <% for(review of listing.reviews) { %>
-                    <div class="card col-5 ms-3 mb-3">
-                      <div class="card-body">
-                        <h5 class="card-title">Jaiki Sharma</h5>
-                        <p class="card-text">
-                          <%= review.comment %>
-                        </p>
-                        <p class="card-text">Rating: <%= review.rating %> / 5</p>
-                      </div>
-                      <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="mb-2"
-                        method="POST">
-                        <button class="btn btn-sm btn-dark">Delete</button>
-                      </form>
-                    </div>
-                    <% } %>
+    <div class="row gx-5">
+        <div class="col-lg-8 mb-4">
+            <div class="pro-glass-panel">
+                <h3 class="mb-4 fw-bold" style="color: #1a1a2e;">About this place</h3>
+                <p class="pro-description"><%= listing.description %></p>
+                
+                <hr class="my-4" style="opacity: 0.1;">
+                
+                <h4 class="mb-3 fw-bold" style="color: #1a1a2e;">Details</h4>
+                <ul class="pro-detail-list">
+                    <li class="pro-detail-item">
+                        <div class="pro-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <strong>Location</strong><br>
+                            <%= listing.location %>, <%= listing.country %>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="btns mt-5">
+                    <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit Listing</a>
+                    <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
+                        <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
+                    </form>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
+
+        <div class="col-lg-4">
+            <div class="pro-glass-panel" style="position: sticky; top: 2rem;">
+                <div class="pro-price-tag">
+                    &#8377; <%= (listing.price !==null && listing.price !==undefined) ? listing.price.toLocaleString("en-IN") : "N/A" %> <span style="font-size: 1.2rem; color: #888; font-weight: 500;">/night</span>
+                </div>
+                
+                <hr class="my-4" style="opacity: 0.1;">
+                
+                <h4 class="mb-3 fw-bold">Leave a Review</h4>
+                <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
+                    <div class="mb-4">
+                        <label for="rating" class="form-label fw-bold">Rating</label>
+                        <input type="range" min="1" max="5" id="rating" name="review[rating]" class="pro-range form-range">
+                    </div>
+                    <div class="mb-4">
+                        <label for="comment" class="form-label fw-bold">Your Review</label>
+                        <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control pro-input" style="border-radius: 12px; resize: none; background: #f8f9fa;" required></textarea>
+                        <div class="invalid-feedback">Please submit a comment for the review</div>
+                    </div>
+                    <button class="btn pro-btn pro-btn-primary w-100">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="pro-reviews-section">
+        <h3 class="mb-4 fw-bold" style="color: #1a1a2e; border-bottom: 2px solid #fe424d; display: inline-block; padding-bottom: 0.5rem;">Guest Reviews</h3>
+        <% if(listing.reviews && listing.reviews.length > 0) { %>
+            <div class="row mt-4">
+                <% for(review of listing.reviews) { %>
+                    <div class="col-md-6 mb-4">
+                        <div class="pro-review-card">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="pro-review-author">Guest User</div>
+                                <div class="pro-review-rating">
+                                    <% for(let i=1; i<=5; i++) { %>
+                                        <% if(i <= review.rating) { %>
+                                            <i class="fa-solid fa-star"></i>
+                                        <% } else { %>
+                                            <i class="fa-regular fa-star"></i>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <p class="pro-review-text">"<%= review.comment %>"</p>
+                            <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" class="mt-3 text-end">
+                                <button class="btn btn-sm btn-outline-danger" style="border-radius: 8px;">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } else { %>
+            <div class="text-center p-5 mt-4" style="background: #f8f9fa; border-radius: 16px;">
+                <i class="fa-regular fa-comment-dots" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                <h5 class="text-muted">No reviews yet. Be the first to leave one!</h5>
+            </div>
+        <% } %>
+    </div>
+</div>

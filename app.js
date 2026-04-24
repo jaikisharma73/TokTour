@@ -13,6 +13,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
 main().then(() => {
@@ -64,16 +65,15 @@ app.use((req, res, next) => {
     next();
 });
 
-
 app.get("/demouser", async (req, res) => {
-    let fakeUser = new User({
+    let fackUser = new User({
         email: "student@gmail.com",
-        username: "delta-student"
+        username: "delta-student",
     });
-
-    let registeredUser = await User.register(fakeUser, "helloworld");
+    let registeredUser = await User.register(fackUser, "helloworld");
     res.send(registeredUser);
-});
+})
+
 
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", reviews);

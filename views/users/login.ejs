@@ -1,0 +1,22 @@
+<% layout("/layouts/boilerplate")%>
+
+    <div class="pro-form-container">
+        <h3 class="pro-form-title">Login for TokTour</h3>
+
+        <form method="POST" action="/login" novalidate class="needs-validation">
+            <div class="mb-4">
+                <label for="username" class="pro-label form-label">Username</label>
+                <input name="username" placeholder="Choose a unique username" type="text" class="form-control pro-input"
+                    required />
+                <div class="invalid-feedback">Please choose a username</div>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="pro-label form-label">Password</label>
+                <input name="password" placeholder="Create a password" type="password" class="form-control pro-input"
+                    required />
+                <div class="invalid-feedback">Please create a password</div>
+            </div>
+
+            <button class="btn pro-btn pro-btn-primary pro-form-btn">Login</button>
+        </form>
+    </div>

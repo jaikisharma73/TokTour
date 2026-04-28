@@ -25,10 +25,17 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-circle-user fs-4"></i>
+            <% if(currUser) { %>
+              <span class="ms-1 fw-bold"><%= currUser.username %></span>
+            <% } %>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/signup">Sign up</a></li>
-            <li><a class="dropdown-item" href="/login">Log in</a></li>
+            <% if(!currUser) { %>
+              <li><a class="dropdown-item" href="/signup">Sign up</a></li>
+              <li><a class="dropdown-item" href="/login">Log in</a></li>
+            <% } else { %>
+              <li><a class="dropdown-item" href="/logout">Log out</a></li>
+            <% } %>
           </ul>
         </li>
       </ul>

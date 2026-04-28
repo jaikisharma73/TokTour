@@ -36,11 +36,12 @@ router.get("/:id", async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).send("Listing not found");
     }
-    const listing = await Listing.findById(id).populate("reviews");
+    const listing = await Listing.findById(id).populate("reviews").populate("owner");
     if (!listing) {
         req.flash("error", "No Listing Exists!");
         return res.redirect("/listings");
     }
+    console.log(listing);
     res.render("listings/show.ejs", { listing });
 });
 
@@ -49,6 +50,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", isLoggedIn, validateListing,
     wrapAsync(async (req, res, next) => {
         const newListing = new Listing(req.body.listing);
+        newListing.owner = req.user._id;
         await newListing.save();
         req.flash("success", "New Listing Added!");
         res.redirect("/listings");

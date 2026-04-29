@@ -15,10 +15,10 @@
             <div class="col-lg-8 mb-4">
                 <div class="pro-glass-panel">
                     <h3 class="mb-4 fw-bold" style="color: #1a1a2e;">About this place</h3>
-                    <p class="text-muted mb-3">
-                        <i>Owned by: <b><%= listing.owner ? listing.owner.username : "Unknown" %></b></i>
-                    </p>
-                    <hr>
+                    <i>
+                        <%= listing.owner.username %>
+                    </i>
+
                     <p class="pro-description">
                         <%= listing.description %>
                     </p>
@@ -35,14 +35,16 @@
                             </div>
                         </li>
                     </ul>
-
-                    <div class="btns mt-5">
-                        <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
-                            Listing</a>
-                        <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
-                            <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
-                        </form>
-                    </div>
+                    <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+                        <div class="btns mt-5">
+                            <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
+                                Listing</a>
+                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE"
+                                style="display:inline;">
+                                <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
+                            </form>
+                        </div>
+                        <% } %>
                 </div>
             </div>
 

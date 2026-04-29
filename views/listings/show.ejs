@@ -35,16 +35,15 @@
                             </div>
                         </li>
                     </ul>
-                    <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
-                        <div class="btns mt-5">
-                            <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
-                                Listing</a>
-                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE"
-                                style="display:inline;">
-                                <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
-                            </form>
-                        </div>
-                        <% } %>
+
+                    <div class="btns mt-5">
+                        <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
+                            Listing</a>
+                        <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
+                            <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
 

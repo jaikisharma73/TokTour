@@ -1,32 +1,37 @@
 <% layout("/layouts/boilerplate")%>
 
-<div class="pro-index-container">
-  <h1 class="pro-page-title">Explore Our Top Listings</h1>
-  
-  <div class="pro-grid">
-    <% for(let listing of allListings) { %>
-      <div class="pro-card">
-        <a href="/listings/<%= listing._id %>" class="pro-card-link"></a>
-        
-        <div class="pro-card-img-wrapper">
-          <img src="<%= listing.image.url %>" class="pro-card-img" alt="Listing Image" />
-          <div class="pro-card-overlay"></div>
-        </div>
-        
-        <div class="pro-card-body">
-          <h5 class="pro-card-title"><%= listing.title %></h5>
-          <p class="pro-card-desc"><%= listing.description %></p>
-          
-          <div class="pro-card-footer">
-            <div class="pro-card-price">
-              &#8377; <%= (listing.price !==null && listing.price !==undefined) ? listing.price.toLocaleString("en-IN") : "N/A" %> <span>/Night</span>
-            </div>
-            <div style="color: #1a1a2e; font-size: 0.9rem; font-weight: 600;">
-              View Details <i class="fa-solid fa-arrow-right ms-1" style="color: #fe424d;"></i>
+  <div class="pro-index-container">
+    <h1 class="pro-page-title">Explore Our Top Listings ..</h1>
+
+    <div class="pro-grid">
+      <% for(let listing of allListings) { %>
+        <div class="pro-card">
+          <a href="/listings/<%= listing._id %>" class="pro-card-link"></a>
+
+          <div class="pro-card-img-wrapper">
+            <img src="<%= listing.image.url %>" class="pro-card-img" alt="Listing Image" />
+            <div class="pro-card-overlay"></div>
+          </div>
+
+          <div class="pro-card-body">
+            <h5 class="pro-card-title">
+              <%= listing.title %>
+            </h5>
+            <p class="pro-card-desc">
+              <%= listing.description %>
+            </p>
+
+            <div class="pro-card-footer">
+              <div class="pro-card-price">
+                &#8377; <%= (listing.price !==null && listing.price !==undefined) ?
+                  listing.price.toLocaleString("en-IN") : "N/A" %> <span>/Night</span>
+              </div>
+              <div style="color: #1a1a2e; font-size: 0.9rem; font-weight: 600;">
+                View Details <i class="fa-solid fa-arrow-right ms-1" style="color: #fe424d;"></i>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <% } %>
+        <% } %>
+    </div>
   </div>
-</div>

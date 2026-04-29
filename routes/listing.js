@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).send("Listing not found");
     }
-    const listing = await Listing.findById(id).populate("reviews").populate("owner");
+    const listing = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author" }, }).populate("owner");
     if (!listing) {
         req.flash("error", "No Listing Exists!");
         return res.redirect("/listings");

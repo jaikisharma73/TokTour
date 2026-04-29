@@ -35,14 +35,16 @@
                             </div>
                         </li>
                     </ul>
-
-                    <div class="btns mt-5">
-                        <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
-                            Listing</a>
-                        <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
-                            <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
-                        </form>
-                    </div>
+                    <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
+                        <div class="btns mt-5">
+                            <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
+                                Listing</a>
+                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE"
+                                style="display:inline;">
+                                <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
+                            </form>
+                        </div>
+                        <%} %>
 
                 </div>
             </div>
@@ -57,23 +59,26 @@
 
                     <hr class="my-4" style="opacity: 0.1;">
 
-                    <h4 class="mb-3 fw-bold">Leave a Review</h4>
-                    <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation"
-                        novalidate>
-                        <div class="mb-4">
-                            <label for="rating" class="form-label fw-bold">Rating</label>
-                            <input type="range" min="1" max="5" id="rating" name="review[rating]"
-                                class="pro-range form-range">
-                        </div>
-                        <div class="mb-4">
-                            <label for="comment" class="form-label fw-bold">Your Review</label>
-                            <textarea name="review[comment]" id="comment" cols="30" rows="4"
-                                class="form-control pro-input"
-                                style="border-radius: 12px; resize: none; background: #f8f9fa;" required></textarea>
-                            <div class="invalid-feedback">Please submit a comment for the review</div>
-                        </div>
-                        <button class="btn pro-btn pro-btn-primary w-100">Submit Review</button>
-                    </form>
+
+                    <% if(currUser) { %>
+                        <h4 class="mb-3 fw-bold">Leave a Review</h4>
+                        <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation"
+                            novalidate>
+                            <div class="mb-4">
+                                <label for="rating" class="form-label fw-bold">Rating</label>
+                                <input type="range" min="1" max="5" id="rating" name="review[rating]"
+                                    class="pro-range form-range">
+                            </div>
+                            <div class="mb-4">
+                                <label for="comment" class="form-label fw-bold">Your Review</label>
+                                <textarea name="review[comment]" id="comment" cols="30" rows="4"
+                                    class="form-control pro-input"
+                                    style="border-radius: 12px; resize: none; background: #f8f9fa;" required></textarea>
+                                <div class="invalid-feedback">Please submit a comment for the review</div>
+                            </div>
+                            <button class="btn pro-btn pro-btn-primary w-100">Submit Review</button>
+                        </form>
+                        <% } %>
                 </div>
             </div>
         </div>
@@ -81,14 +86,16 @@
         <div class="pro-reviews-section">
             <h3 class="mb-4 fw-bold"
                 style="color: #1a1a2e; border-bottom: 2px solid #fe424d; display: inline-block; padding-bottom: 0.5rem;">
-                Guest Reviews</h3>
+                All Reviews
+            </h3>
             <% if(listing.reviews && listing.reviews.length> 0) { %>
                 <div class="row mt-4">
                     <% for(review of listing.reviews) { %>
                         <div class="col-md-6 mb-4">
                             <div class="pro-review-card">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="pro-review-author">Guest User</div>
+                                    <div class="pro-review-author">@<%= review.author ? review.author.username : 'Unknown User' %>
+                                    </div>
                                     <div class="pro-review-rating">
                                         <% for(let i=1; i<=5; i++) { %>
                                             <% if(i <=review.rating) { %>

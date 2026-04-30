@@ -1,32 +1,27 @@
 <% layout("/layouts/boilerplate")%>
 
     <div class="pro-listing-container">
-        <div class="pro-header">
-            <h1 class="pro-title">
-                <%= listing.title %>
-            </h1>
-        </div>
+        <div class="row gx-5 mb-5 mt-4">
+            <!-- Left side: Image -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="pro-image-wrapper mb-0" style="height: 100%;">
+                    <img src="<%= listing.image.url %>" class="pro-image" alt="Listing Image" style="height: 100%; object-fit: contain; background: #f8f9fa;">
+                </div>
+            </div>
+            
+            <!-- Right side: Title, Description, Details -->
+            <div class="col-lg-6">
+                <div class="pro-glass-panel d-flex flex-column" style="height: 100%;">
+                    <h1 class="pro-title text-start mb-2" style="font-size: 2.5rem; text-align: left;"><%= listing.title %></h1>
+                    <div class="pro-price-tag mb-4">
+                        &#8377; <%= (listing.price !==null && listing.price !==undefined) ? listing.price.toLocaleString("en-IN") : "N/A" %> <span style="font-size: 1.2rem; color: #888; font-weight: 500;">/night</span>
+                    </div>
 
-        <div class="pro-image-wrapper">
-            <img src="<%= listing.image.url %>" class="pro-image" alt="Listing Image">
-        </div>
-
-        <div class="row gx-5">
-            <div class="col-lg-8 mb-4">
-                <div class="pro-glass-panel">
-                    <h3 class="mb-4 fw-bold" style="color: #1a1a2e;">About this place</h3>
-                    <i>
-                        <%= listing.owner.username %>
-                    </i>
-
-                    <p class="pro-description">
+                    <p class="pro-description mb-4">
                         <%= listing.description %>
                     </p>
 
-                    <hr class="my-4" style="opacity: 0.1;">
-
-                    <h4 class="mb-3 fw-bold" style="color: #1a1a2e;">Details</h4>
-                    <ul class="pro-detail-list">
+                    <ul class="pro-detail-list mb-4">
                         <li class="pro-detail-item">
                             <div class="pro-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
                             <div>
@@ -35,93 +30,83 @@
                             </div>
                         </li>
                     </ul>
+                    
+                    <p class="text-muted mb-4">Hosted by <i><%= listing.owner.username %></i></p>
+
                     <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
-                        <div class="btns mt-5">
-                            <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
-                                Listing</a>
-                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE"
-                                style="display:inline;">
+                        <div class="btns mt-auto pt-4 border-top" style="border-color: rgba(0,0,0,0.05) !important;">
+                            <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit Listing</a>
+                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
                                 <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
                             </form>
                         </div>
-                        <%} %>
-
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="pro-glass-panel" style="position: sticky; top: 2rem;">
-                    <div class="pro-price-tag">
-                        &#8377; <%= (listing.price !==null && listing.price !==undefined) ?
-                            listing.price.toLocaleString("en-IN") : "N/A" %> <span
-                                style="font-size: 1.2rem; color: #888; font-weight: 500;">/night</span>
-                    </div>
-
-                    <hr class="my-4" style="opacity: 0.1;">
-
-
-                    <% if(currUser) { %>
-                        <h4 class="mb-3 fw-bold">Leave a Review</h4>
-                        <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation"
-                            novalidate>
-                            <div class="mb-4">
-                                <label for="rating" class="form-label fw-bold">Rating</label>
-                                <input type="range" min="1" max="5" id="rating" name="review[rating]"
-                                    class="pro-range form-range">
-                            </div>
-                            <div class="mb-4">
-                                <label for="comment" class="form-label fw-bold">Your Review</label>
-                                <textarea name="review[comment]" id="comment" cols="30" rows="4"
-                                    class="form-control pro-input"
-                                    style="border-radius: 12px; resize: none; background: #f8f9fa;" required></textarea>
-                                <div class="invalid-feedback">Please submit a comment for the review</div>
-                            </div>
-                            <button class="btn pro-btn pro-btn-primary w-100">Submit Review</button>
-                        </form>
-                        <% } %>
+                    <%} %>
                 </div>
             </div>
         </div>
 
-        <div class="pro-reviews-section">
-            <h3 class="mb-4 fw-bold"
-                style="color: #1a1a2e; border-bottom: 2px solid #fe424d; display: inline-block; padding-bottom: 0.5rem;">
-                All Reviews
-            </h3>
-            <% if(listing.reviews && listing.reviews.length> 0) { %>
-                <div class="row mt-4">
-                    <% for(review of listing.reviews) { %>
-                        <div class="col-md-6 mb-4">
-                            <div class="pro-review-card">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="pro-review-author">@<%= review.author ? review.author.username : 'Unknown User' %>
-                                    </div>
-                                    <div class="pro-review-rating">
-                                        <% for(let i=1; i<=5; i++) { %>
-                                            <% if(i <=review.rating) { %>
-                                                <i class="fa-solid fa-star"></i>
-                                                <% } else { %>
-                                                    <i class="fa-regular fa-star"></i>
+        <hr class="my-5" style="opacity: 0.1;">
+
+        <!-- All on bottom (Reviews) -->
+        <div class="row gx-5">
+            <% if(currUser) { %>
+            <div class="col-lg-4 mb-5">
+                <div class="pro-glass-panel" style="position: sticky; top: 2rem;">
+                    <h4 class="mb-3 fw-bold">Leave a Review</h4>
+                    <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
+                        <div class="mb-4">
+                            <label for="rating" class="form-label fw-bold">Rating</label>
+                            <input type="range" min="1" max="5" id="rating" name="review[rating]" class="pro-range form-range">
+                        </div>
+                        <div class="mb-4">
+                            <label for="comment" class="form-label fw-bold">Your Review</label>
+                            <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control pro-input" style="border-radius: 12px; resize: none; background: #f8f9fa;" required></textarea>
+                            <div class="invalid-feedback">Please submit a comment for the review</div>
+                        </div>
+                        <button class="btn pro-btn pro-btn-primary w-100">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-8">
+            <% } else { %>
+            <div class="col-lg-12">
+            <% } %>
+                <div class="pro-reviews-section mt-0">
+                    <h3 class="mb-4 fw-bold" style="color: #1a1a2e; border-bottom: 2px solid #fe424d; display: inline-block; padding-bottom: 0.5rem;">
+                        All Reviews
+                    </h3>
+                    <% if(listing.reviews && listing.reviews.length> 0) { %>
+                        <div class="row mt-4">
+                            <% for(review of listing.reviews) { %>
+                                <div class="col-md-<%= currUser ? '6' : '4' %> mb-4">
+                                    <div class="pro-review-card">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="pro-review-author">@<%= review.author ? review.author.username : 'Unknown User' %></div>
+                                            <div class="pro-review-rating">
+                                                <% for(let i=1; i<=5; i++) { %>
+                                                    <% if(i <=review.rating) { %>
+                                                        <i class="fa-solid fa-star"></i>
+                                                    <% } else { %>
+                                                        <i class="fa-regular fa-star"></i>
                                                     <% } %>
-                                                        <% } %>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                        <p class="pro-review-text">"<%= review.comment %>"</p>
+                                        <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" class="mt-3 text-end">
+                                            <button class="btn btn-sm btn-outline-danger" style="border-radius: 8px;">Delete</button>
+                                        </form>
                                     </div>
                                 </div>
-                                <p class="pro-review-text">"<%= review.comment %>"</p>
-                                <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                    method="POST" class="mt-3 text-end">
-                                    <button class="btn btn-sm btn-outline-danger"
-                                        style="border-radius: 8px;">Delete</button>
-                                </form>
-                            </div>
+                            <% } %>
                         </div>
-                        <% } %>
-                </div>
-                <% } else { %>
-                    <div class="text-center p-5 mt-4" style="background: #f8f9fa; border-radius: 16px;">
-                        <i class="fa-regular fa-comment-dots"
-                            style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
-                        <h5 class="text-muted">No reviews yet. Be the first to leave one!</h5>
-                    </div>
+                    <% } else { %>
+                        <div class="text-center p-5 mt-4" style="background: #f8f9fa; border-radius: 16px;">
+                            <i class="fa-regular fa-comment-dots" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                            <h5 class="text-muted">No reviews yet. Be the first to leave one!</h5>
+                        </div>
                     <% } %>
+                </div>
+            </div>
         </div>
     </div>

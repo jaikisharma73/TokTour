@@ -1,50 +1,64 @@
 <% layout("/layouts/boilerplate")%>
 
-<div class="pro-form-container">
-    <h3 class="pro-form-title">Edit Listing</h3>
-    
-    <form method="post" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
-        <div class="mb-4">
-            <label for="title" class="pro-label form-label">Title</label>
-            <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control pro-input" required />
-            <div class="valid-feedback">Title Looks Good</div>
-        </div>
-        
-        <div class="mb-4">
-            <label for="description" class="pro-label form-label">Description</label>
-            <textarea name="listing[description]" class="form-control pro-input pro-textarea" required><%= listing.description %></textarea>
-            <div class="invalid-feedback">Please Enter A Short Description</div>
-        </div>
-        
-        <div class="mb-4">
-            <label for="image link" class="pro-label form-label">Image URL</label>
-            <input name="listing[image][url]" value="<%= listing.image.url %>" type="url" class="form-control pro-input" required />
-            <div class="invalid-feedback">Please provide a valid image URL</div>
-        </div>
-        
-        <div class="row gx-4">
-            <div class="mb-4 col-md-4">
-                <label for="price" class="pro-label form-label">Price (per night)</label>
-                <div class="input-group">
-                    <span class="input-group-text" style="border-radius: 12px 0 0 12px; border: 2px solid #e9ecef; border-right: none; background: #f8f9fa;">&#8377;</span>
-                    <input name="listing[price]" value="<%= listing.price %>" type="number" min="0" class="form-control pro-input" style="border-radius: 0 12px 12px 0; border-left: none;" required />
-                    <div class="invalid-feedback">Price Should Be Valid</div>
+    <div class="pro-form-container">
+        <h3 class="pro-form-title">Edit Listing</h3>
+
+        <form method="post" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation"
+            enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="title" class="pro-label form-label">Title</label>
+                <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control pro-input"
+                    required />
+                <div class="valid-feedback">Title Looks Good</div>
+            </div>
+
+            <div class="mb-4">
+                <label for="description" class="pro-label form-label">Description</label>
+                <textarea name="listing[description]" class="form-control pro-input pro-textarea"
+                    required><%= listing.description %></textarea>
+                <div class="invalid-feedback">Please Enter A Short Description</div>
+            </div>
+
+            <div class="mb-4">
+                <label for="title" class="pro-label form-label">Original Listing Image</label>
+                <br>
+                <img src="<%= originalImageUrl %>" class="img-fluid"
+                    style="max-width: 250px; height: auto; border-radius: 8px;" />
+            </div>
+
+            <div class="mb-4">
+                <label for="image link" class="pro-label form-label">Upload New Image</label>
+                <input name="listing[image]" type="file" class="form-control pro-input" />
+            </div>
+
+            <div class="row gx-4">
+                <div class="mb-4 col-md-4">
+                    <label for="price" class="pro-label form-label">Price (per night)</label>
+                    <div class="input-group">
+                        <span class="input-group-text"
+                            style="border-radius: 12px 0 0 12px; border: 2px solid #e9ecef; border-right: none; background: #f8f9fa;">&#8377;</span>
+                        <input name="listing[price]" value="<%= listing.price %>" type="number" min="0"
+                            class="form-control pro-input" style="border-radius: 0 12px 12px 0; border-left: none;"
+                            required />
+                        <div class="invalid-feedback">Price Should Be Valid</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 col-md-8">
+                    <label for="country" class="pro-label form-label">Country</label>
+                    <input name="listing[country]" value="<%= listing.country %>" type="text"
+                        class="form-control pro-input" required />
+                    <div class="invalid-feedback">Country Name Should Be Valid</div>
                 </div>
             </div>
-            
-            <div class="mb-4 col-md-8">
-                <label for="country" class="pro-label form-label">Country</label>
-                <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control pro-input" required />
-                <div class="invalid-feedback">Country Name Should Be Valid</div>
+
+            <div class="mb-4">
+                <label for="location" class="pro-label form-label">Location (City, State)</label>
+                <input name="listing[location]" value="<%= listing.location %>" type="text"
+                    class="form-control pro-input" required />
+                <div class="invalid-feedback">Location Should Be Valid</div>
             </div>
-        </div>
-        
-        <div class="mb-4">
-            <label for="location" class="pro-label form-label">Location (City, State)</label>
-            <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control pro-input" required />
-            <div class="invalid-feedback">Location Should Be Valid</div>
-        </div>
-        
-        <button class="btn pro-btn pro-btn-primary pro-form-btn">Save Changes</button>
-    </form>
-</div>
+
+            <button class="btn pro-btn pro-btn-primary pro-form-btn">Save Changes</button>
+        </form>
+    </div>

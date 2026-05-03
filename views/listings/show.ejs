@@ -5,16 +5,21 @@
             <!-- Left side: Image -->
             <div class="col-lg-6 mb-4 mb-lg-0">
                 <div class="pro-image-wrapper mb-0" style="height: 100%;">
-                    <img src="<%= listing.image.url %>" class="pro-image" alt="Listing Image" style="height: 100%; object-fit: contain; background: #f8f9fa;">
+                    <img src="<%= listing.image.url %>" class="pro-image" alt="Listing Image"
+                        style="height: 100%; object-fit: contain; background: #f8f9fa;">
                 </div>
             </div>
-            
+
             <!-- Right side: Title, Description, Details -->
             <div class="col-lg-6">
                 <div class="pro-glass-panel d-flex flex-column" style="height: 100%;">
-                    <h1 class="pro-title text-start mb-2" style="font-size: 2.5rem; text-align: left;"><%= listing.title %></h1>
+                    <h1 class="pro-title text-start mb-2" style="font-size: 2.5rem; text-align: left;">
+                        <%= listing.title %>
+                    </h1>
                     <div class="pro-price-tag mb-4">
-                        &#8377; <%= (listing.price !==null && listing.price !==undefined) ? listing.price.toLocaleString("en-IN") : "N/A" %> <span style="font-size: 1.2rem; color: #888; font-weight: 500;">/night</span>
+                        &#8377; <%= (listing.price !==null && listing.price !==undefined) ?
+                            listing.price.toLocaleString("en-IN") : "N/A" %> <span
+                                style="font-size: 1.2rem; color: #888; font-weight: 500;">/night</span>
                     </div>
 
                     <p class="pro-description mb-4">
@@ -30,17 +35,21 @@
                             </div>
                         </li>
                     </ul>
-                    
-                    <p class="text-muted mb-4">Hosted by <i><%= listing.owner.username %></i></p>
+
+                    <p class="text-muted mb-4">Hosted by <i>
+                            <%= listing.owner.username %>
+                        </i></p>
 
                     <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
                         <div class="btns mt-auto pt-4 border-top" style="border-color: rgba(0,0,0,0.05) !important;">
-                            <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit Listing</a>
-                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
+                            <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
+                                Listing</a>
+                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE"
+                                style="display:inline;">
                                 <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
                             </form>
                         </div>
-                    <%} %>
+                        <%} %>
                 </div>
             </div>
         </div>
@@ -50,74 +59,147 @@
         <!-- All on bottom (Reviews) -->
         <div class="row gx-5">
             <% if(currUser) { %>
-            <div class="col-lg-4 mb-5">
-                <div class="pro-glass-panel" style="position: sticky; top: 2rem;">
-                    <h4 class="mb-3 fw-bold">Leave a Review</h4>
-                    <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Rating</label>
-                            <div class="pro-star-rating">
-                                <input type="radio" id="star5" name="review[rating]" value="5" />
-                                <label for="star5" title="5 stars"><i class="fa-solid fa-star"></i></label>
-                                <input type="radio" id="star4" name="review[rating]" value="4" />
-                                <label for="star4" title="4 stars"><i class="fa-solid fa-star"></i></label>
-                                <input type="radio" id="star3" name="review[rating]" value="3" />
-                                <label for="star3" title="3 stars"><i class="fa-solid fa-star"></i></label>
-                                <input type="radio" id="star2" name="review[rating]" value="2" />
-                                <label for="star2" title="2 stars"><i class="fa-solid fa-star"></i></label>
-                                <input type="radio" id="star1" name="review[rating]" value="1" checked />
-                                <label for="star1" title="1 star"><i class="fa-solid fa-star"></i></label>
+                <div class="col-lg-4 mb-5">
+                    <div class="pro-glass-panel" style="position: sticky; top: 2rem;">
+                        <h4 class="mb-3 fw-bold">Leave a Review</h4>
+                        <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation"
+                            novalidate>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Rating</label>
+                                <div class="pro-star-rating">
+                                    <input type="radio" id="star5" name="review[rating]" value="5" />
+                                    <label for="star5" title="5 stars"><i class="fa-solid fa-star"></i></label>
+                                    <input type="radio" id="star4" name="review[rating]" value="4" />
+                                    <label for="star4" title="4 stars"><i class="fa-solid fa-star"></i></label>
+                                    <input type="radio" id="star3" name="review[rating]" value="3" />
+                                    <label for="star3" title="3 stars"><i class="fa-solid fa-star"></i></label>
+                                    <input type="radio" id="star2" name="review[rating]" value="2" />
+                                    <label for="star2" title="2 stars"><i class="fa-solid fa-star"></i></label>
+                                    <input type="radio" id="star1" name="review[rating]" value="1" checked />
+                                    <label for="star1" title="1 star"><i class="fa-solid fa-star"></i></label>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="comment" class="form-label fw-bold">Your Review</label>
+                                <textarea name="review[comment]" id="comment" cols="30" rows="4"
+                                    class="form-control pro-input"
+                                    style="border-radius: 12px; resize: none; background: #f8f9fa;" required></textarea>
+                                <div class="invalid-feedback">Please submit a comment for the review</div>
+                            </div>
+                            <button class="btn pro-btn pro-btn-primary w-100">Submit Review</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <% } else { %>
+                        <div class="col-lg-12">
+                            <% } %>
+                                <div class="pro-reviews-section mt-0">
+                                    <h3 class="mb-4 fw-bold"
+                                        style="color: #1a1a2e; border-bottom: 2px solid #fe424d; display: inline-block; padding-bottom: 0.5rem;">
+                                        All Reviews
+                                    </h3>
+                                    <% if(listing.reviews && listing.reviews.length> 0) { %>
+                                        <div class="row mt-4">
+                                            <% for(review of listing.reviews) { %>
+                                                <div class="col-md-<%= currUser ? '6' : '4' %> mb-4">
+                                                    <div class="pro-review-card">
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center mb-3">
+                                                            <div class="pro-review-author">@<%= review.author ?
+                                                                    review.author.username : 'Unknown User' %>
+                                                            </div>
+                                                            <div class="pro-review-rating">
+                                                                <% for(let i=1; i<=5; i++) { %>
+                                                                    <% if(i <=review.rating) { %>
+                                                                        <i class="fa-solid fa-star"></i>
+                                                                        <% } else { %>
+                                                                            <i class="fa-regular fa-star"></i>
+                                                                            <% } %>
+                                                                                <% } %>
+                                                            </div>
+                                                        </div>
+                                                        <p class="pro-review-text">"<%= review.comment %>"</p>
+                                                        <form
+                                                            action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                                            method="POST" class="mt-3 text-end">
+                                                            <button class="btn btn-sm btn-outline-danger"
+                                                                style="border-radius: 8px;">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                        </div>
+                                        <% } else { %>
+                                            <div class="text-center p-5 mt-4"
+                                                style="background: #f8f9fa; border-radius: 16px;">
+                                                <i class="fa-regular fa-comment-dots"
+                                                    style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                                                <h5 class="text-muted">No reviews yet. Be the first to leave one!</h5>
+                                            </div>
+                                            <% } %>
+                                </div>
+                        </div>
+                </div>
+
+                <!-- Map Section -->
+                <hr class="my-5" style="opacity: 0.1;">
+                <div class="row gx-5 mb-5">
+                    <div class="col-12">
+                        <div class="pro-glass-panel p-4" style="border-radius: 20px;">
+                            <h3 class="mb-4 fw-bold"
+                                style="color: #1a1a2e; border-bottom: 2px solid #fe424d; display: inline-block; padding-bottom: 0.5rem;">
+                                Where you'll be
+                            </h3>
+                            <p class="mb-4" style="font-size: 1.1rem; color: #555;">
+                                <i class="fa-solid fa-location-dot" style="color: #fe424d; margin-right: 8px;"></i>
+                                <%= listing.location %>, <%= listing.country %>
+                            </p>
+                            <div class="map-container"
+                                style="border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: 450px;">
+                                <div id="map" style="width: 100%; height: 100%;"></div>
                             </div>
                         </div>
-                        <div class="mb-4">
-                            <label for="comment" class="form-label fw-bold">Your Review</label>
-                            <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control pro-input" style="border-radius: 12px; resize: none; background: #f8f9fa;" required></textarea>
-                            <div class="invalid-feedback">Please submit a comment for the review</div>
-                        </div>
-                        <button class="btn pro-btn pro-btn-primary w-100">Submit Review</button>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-8">
-            <% } else { %>
-            <div class="col-lg-12">
-            <% } %>
-                <div class="pro-reviews-section mt-0">
-                    <h3 class="mb-4 fw-bold" style="color: #1a1a2e; border-bottom: 2px solid #fe424d; display: inline-block; padding-bottom: 0.5rem;">
-                        All Reviews
-                    </h3>
-                    <% if(listing.reviews && listing.reviews.length> 0) { %>
-                        <div class="row mt-4">
-                            <% for(review of listing.reviews) { %>
-                                <div class="col-md-<%= currUser ? '6' : '4' %> mb-4">
-                                    <div class="pro-review-card">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <div class="pro-review-author">@<%= review.author ? review.author.username : 'Unknown User' %></div>
-                                            <div class="pro-review-rating">
-                                                <% for(let i=1; i<=5; i++) { %>
-                                                    <% if(i <=review.rating) { %>
-                                                        <i class="fa-solid fa-star"></i>
-                                                    <% } else { %>
-                                                        <i class="fa-regular fa-star"></i>
-                                                    <% } %>
-                                                <% } %>
-                                            </div>
-                                        </div>
-                                        <p class="pro-review-text">"<%= review.comment %>"</p>
-                                        <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" class="mt-3 text-end">
-                                            <button class="btn btn-sm btn-outline-danger" style="border-radius: 8px;">Delete</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            <% } %>
-                        </div>
-                    <% } else { %>
-                        <div class="text-center p-5 mt-4" style="background: #f8f9fa; border-radius: 16px;">
-                            <i class="fa-regular fa-comment-dots" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
-                            <h5 class="text-muted">No reviews yet. Be the first to leave one!</h5>
-                        </div>
-                    <% } %>
-                </div>
-            </div>
         </div>
-    </div>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const locationName = "<%= listing.location %>, <%= listing.country %>";
+                const map = L.map('map').setView([20, 0], 2);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locationName)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            const lat = data[0].lat;
+                            const lon = data[0].lon;
+                            map.setView([lat, lon], 12);
+
+                            const redIcon = new L.Icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
+                            });
+
+                            const marker = L.marker([lat, lon], {icon: redIcon}).addTo(map);
+                            
+                            marker.bindTooltip(`<b>${locationName}</b><br>Exact location will be shared after booking`, {
+                                direction: 'top',
+                                className: 'custom-tooltip'
+                            });
+                        }
+                    })
+                    .catch(err => console.log("Error fetching coordinates:", err));
+            });
+        </script>

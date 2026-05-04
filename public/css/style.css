@@ -307,8 +307,8 @@ h3 {
 }
 
 .pro-star-rating label:hover,
-.pro-star-rating label:hover ~ label,
-.pro-star-rating input:checked ~ label {
+.pro-star-rating label:hover~label,
+.pro-star-rating input:checked~label {
     color: #ffc107;
 }
 
@@ -320,7 +320,7 @@ h3 {
 .pro-index-container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem 0;
 }
 
 .pro-page-title {
@@ -762,6 +762,49 @@ h3 {
     .nav-center {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+}
+
+.search-input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    height: 38px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    background-color: white;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 0 1.5rem;
+    outline: none;
+    font-size: 0.9rem;
+    height: 100%;
+}
+
+.search-btn {
+    background-color: #fe424d;
+    color: white;
+    border: none;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    height: 100%;
+    transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #ff6b6b;
 }

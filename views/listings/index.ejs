@@ -1,8 +1,239 @@
 <% layout("/layouts/boilerplate")%>
 
-  <div class="pro-index-container">
-    <h1 class="pro-page-title">Explore Our Top Listings ..</h1>
+  <style>
+    .filters-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
 
+    .filters-wrapper {
+      display: flex;
+      align-items: center;
+      width: 70%;
+      position: relative;
+    }
+
+    #filters {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      width: 100%;
+      scroll-behavior: smooth;
+    }
+
+    #filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slide-btn {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #slide-left {
+      margin-right: 15px;
+    }
+
+    #slide-right {
+      margin-left: 15px;
+    }
+
+    .filter {
+      text-align: center;
+      margin-right: 2rem;
+      margin-top: 1rem;
+      flex: 0 0 auto;
+    }
+
+    .filter p {
+      font-size: 0.8rem;
+    }
+
+    .filter:hover {
+      cursor: pointer;
+      color: #838080;
+    }
+
+    .tax-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 0.5rem;
+      height: 2.5rem;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      margin-left: auto;
+    }
+
+    .tax-toggle .form-check-label {
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+
+    .tax-toggle .form-switch .form-check-input {
+      margin-top: 0.15rem;
+    }
+
+    .tax-info {
+      display: none;
+      font-style: normal;
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .search-input-group {
+      display: flex;
+      width: 50%;
+      min-width: 300px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .search-btn {
+      background-color: #fe424d;
+      color: white;
+      border: none;
+      padding: 0 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .search-btn:hover {
+      background-color: #ff6b6b;
+    }
+  </style>
+
+
+  <div class="filters-main">
+    <div class="filters-wrapper">
+      <button id="slide-left" class="slide-btn"><i class="fa-solid fa-angle-left"></i></button>
+      <div id="filters">
+        <div class="filter">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p>Trending</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-bed"></i></div>
+          <p>Rooms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-tree-city"></i></div>
+          <p>City</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain"></i></div>
+          <p>Mountains</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-swimmer"></i></div>
+          <p>SwimmingPool</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-brands fa-fort-awesome"></i></div>
+          <p>Castles</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-campground"></i></div>
+          <p>Camping</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-cow"></i></div>
+          <p>Farms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-snowflake"></i></div>
+          <p>Arctic</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-igloo"></i></div>
+          <p>Domes</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-ship"></i></div>
+          <p>Boats</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-tree"></i></div>
+          <p>Parks</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-person-skiing"></i></div>
+          <p>Skiing</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-umbrella-beach"></i></div>
+          <p>Tropical</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-house-chimney-window"></i></div>
+          <p>Tiny Homes</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-sun"></i></div>
+          <p>Top Views</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-water"></i></div>
+          <p>Lakefront</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-landmark"></i></div>
+          <p>Historical</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mug-hot"></i></div>
+          <p>B&Bs</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-tents"></i></div>
+          <p>Glamping</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-sun"></i></div>
+          <p>Desert</p>
+        </div>
+      </div>
+      <button id="slide-right" class="slide-btn"><i class="fa-solid fa-angle-right"></i></button>
+    </div>
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="pro-index-container mt-1">
+    <!-- <h1 class="pro-page-title">Explore Our Top Listings ..</h1> -->
     <div class="pro-grid">
       <% for(let listing of allListings) { %>
         <div class="pro-card">
@@ -24,7 +255,7 @@
             <div class="pro-card-footer">
               <div class="pro-card-price">
                 &#8377; <%= (listing.price !==null && listing.price !==undefined) ?
-                  listing.price.toLocaleString("en-IN") : "N/A" %> <span>/Night</span>
+                  listing.price.toLocaleString("en-IN") : "N/A" %> <span>/Night <i class="tax-info">+8% GST</i></span>
               </div>
               <div style="color: #1a1a2e; font-size: 0.9rem; font-weight: 600;">
                 View Details <i class="fa-solid fa-arrow-right ms-1" style="color: #fe424d;"></i>
@@ -35,3 +266,33 @@
         <% } %>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const filters = document.getElementById("filters");
+      const slideLeft = document.getElementById("slide-left");
+      const slideRight = document.getElementById("slide-right");
+
+      slideLeft.addEventListener("click", () => {
+        filters.scrollBy({ left: -300, behavior: 'smooth' });
+      });
+
+      slideRight.addEventListener("click", () => {
+        filters.scrollBy({ left: 300, behavior: 'smooth' });
+      });
+    });
+
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+
+    taxSwitch.addEventListener("click", () => {
+      let taxInfo = document.getElementsByClassName("tax-info");
+      for (let info of taxInfo) {
+        if (info.style.display !== "inline") {
+          info.style.display = "inline";
+        } else {
+          info.style.display = "none";
+        }
+      }
+    });
+
+  </script>

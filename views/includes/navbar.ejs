@@ -14,9 +14,18 @@
           <a class="nav-link" href="/listings">Explore</a>
         </li>
       </ul>
+
+      <!-- Search Bar Center -->
+      <div class="search-container d-none d-md-flex flex-grow-1 px-3 px-lg-5">
+        <form class="search-input-group mx-auto" action="/listings" method="GET">
+          <input type="text" class="search-input" name="search" placeholder="Search destinations...">
+          <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+
       <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item">
-          <a class="nav-link" href="/listings/new">Airbnb your home</a>
+          <a class="nav-link" href="/listings/new">TokTour your home</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"

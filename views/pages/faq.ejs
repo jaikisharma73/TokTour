@@ -1,0 +1,79 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="pro-index-container pt-5">
+    <div class="pro-header mb-5 text-center">
+        <h1 class="pro-page-title mb-3">Frequently Asked Questions</h1>
+        <p class="text-muted fs-5 mx-auto" style="max-width: 600px;">
+            Find quick answers to common questions about booking, hosting, and using TokTour.
+        </p>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8">
+            <div class="accordion" id="faqAccordion">
+                
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item border-0 mb-3 pro-glass-panel p-2" style="border-radius: 16px;">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: #1a1a2e; font-size: 1.1rem;">
+                            How do I book a stay on TokTour?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted pt-0 pb-3 px-4">
+                            Booking a stay is simple! Just search for your desired destination and dates, browse the available listings, and click on one you love. Then, click "Book Now" and follow the payment instructions to secure your reservation.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item border-0 mb-3 pro-glass-panel p-2" style="border-radius: 16px;">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: #1a1a2e; font-size: 1.1rem;">
+                            What is the cancellation policy?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted pt-0 pb-3 px-4">
+                            Cancellation policies vary depending on the host. Each listing clearly states its cancellation policy (e.g., Flexible, Moderate, Strict) before you book. You can view these details on the listing page and during checkout.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item border-0 mb-3 pro-glass-panel p-2" style="border-radius: 16px;">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color: #1a1a2e; font-size: 1.1rem;">
+                            How do I become a host?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted pt-0 pb-3 px-4">
+                            To become a host, sign up or log in to your account, click on "TokTour your home" in the navigation bar, and follow the step-by-step guide to set up your listing. You'll need to provide photos, a description, location, and pricing details.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item border-0 mb-3 pro-glass-panel p-2" style="border-radius: 16px;">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="color: #1a1a2e; font-size: 1.1rem;">
+                            Are payments secure?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted pt-0 pb-3 px-4">
+                            Yes, TokTour uses industry-standard encryption to protect your personal and payment information. We process payments through secure, trusted third-party gateways to ensure your financial data is safe.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="text-center mb-5">
+        <p class="text-muted">Still have questions?</p>
+        <a href="/contact" class="btn pro-btn pro-btn-primary">Contact Support</a>
+    </div>
+</div>

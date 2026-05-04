@@ -4,15 +4,29 @@
         <div class="row gx-5 mb-5 mt-4">
             <!-- Left side: Image -->
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="pro-image-wrapper mb-0" style="height: 100%;">
+                <div class="pro-image-wrapper mb-3" style="height: 450px; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
                     <img src="<%= listing.image.url %>" class="pro-image" alt="Listing Image"
-                        style="height: 100%; object-fit: contain; background: #f8f9fa;">
+                        style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </div>
+
+                <!-- Hosted By and Controls -->
+                <div class="d-flex justify-content-between align-items-center px-2">
+                    <p class="text-muted mb-0" style="font-size: 1.1rem;">Hosted by <span class="fw-bold text-dark"><%= listing.owner.username %></span></p>
+                    
+                    <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
+                        <div class="btns">
+                            <a href="/listings/<%= listing._id %>/edit" class="btn btn-sm btn-outline-dark me-2" style="border-radius: 8px; font-weight: 500;">Edit</a>
+                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE" style="display:inline;">
+                                <button class="btn btn-sm btn-outline-danger" style="border-radius: 8px; font-weight: 500;">Delete</button>
+                            </form>
+                        </div>
+                    <%} %>
                 </div>
             </div>
 
             <!-- Right side: Title, Description, Details -->
             <div class="col-lg-6">
-                <div class="pro-glass-panel d-flex flex-column" style="height: 100%;">
+                <div class="pro-glass-panel d-flex flex-column">
                     <h1 class="pro-title text-start mb-2" style="font-size: 2.5rem; text-align: left;">
                         <%= listing.title %>
                     </h1>
@@ -36,20 +50,7 @@
                         </li>
                     </ul>
 
-                    <p class="text-muted mb-4">Hosted by <i>
-                            <%= listing.owner.username %>
-                        </i></p>
 
-                    <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
-                        <div class="btns mt-auto pt-4 border-top" style="border-color: rgba(0,0,0,0.05) !important;">
-                            <a href="/listings/<%= listing._id %>/edit" class="btn pro-btn pro-btn-primary me-3">Edit
-                                Listing</a>
-                            <form method="post" action="/listings/<%=listing._id%>?_method=DELETE"
-                                style="display:inline;">
-                                <button class="btn pro-btn pro-btn-secondary">Delete Listing</button>
-                            </form>
-                        </div>
-                        <%} %>
                 </div>
             </div>
         </div>

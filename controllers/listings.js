@@ -2,9 +2,23 @@ const Listing = require("../models/listing.js");
 const mongoose = require("mongoose");
 
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
-
+    let { filter, search } = req.query;
+    let query = {};
+    
+    if (filter) {
+        query.filters = filter;
+    }
+    
+    if (search) {
+        query.$or = [
+            { title: { $regex: search, $options: "i" } },
+            { location: { $regex: search, $options: "i" } },
+            { country: { $regex: search, $options: "i" } }
+        ];
+    }
+    
+    const allListings = await Listing.find(query);
+    res.render("listings/index.ejs", { allListings, currentFilter: filter || "" });
 }
 module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
@@ -26,7 +40,14 @@ module.exports.showListing = async (req, res) => {
 module.exports.createListing = async (req, res, next) => {
     let url = req.file.path;
     let filename = req.file.filename;
-    const newListing = new Listing(req.body.listing);
+    
+    // Ensure filters is an array even if empty or undefined
+    let listingData = req.body.listing;
+    if (!listingData.filters) {
+        listingData.filters = [];
+    }
+
+    const newListing = new Listing(listingData);
     newListing.image = { url, filename };
     newListing.owner = req.user._id;
     await newListing.save();
@@ -54,7 +75,13 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.updateListing = async (req, res) => {
 
     let { id } = req.params;
-    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    
+    let listingData = req.body.listing;
+    if (!listingData.filters) {
+        listingData.filters = []; // If no checkboxes selected, clear filters
+    }
+
+    let listing = await Listing.findByIdAndUpdate(id, { ...listingData });
 
     if (typeof req.file !== "undefined") {
         let url = req.file.path;

@@ -1,52 +1,93 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
+
+    <!-- LEFT: Logo + Explore (always visible on desktop) -->
     <a class="navbar-brand pro-logo" href="/listings">
       <div class="logo-icon-wrapper">
         <i class="fa-solid fa-torii-gate"></i>
       </div>
+      <span class="logo-text">Tok<span class="logo-highlight">Tour</span></span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <a class="nav-link fw-semibold d-none d-md-inline-flex me-auto" href="/listings" style="color: #222;">Explore</a>
+
+    <!-- Hamburger toggler (mobile only) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/listings">Explore</a>
-        </li>
-      </ul>
 
-      <!-- Search Bar Center -->
-      <div class="search-container d-none d-md-flex flex-grow-1 px-3 px-lg-5">
-        <form class="search-input-group mx-auto" action="/listings" method="GET">
-          <input type="text" class="search-input" name="search" placeholder="Search destinations...">
-          <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
-      </div>
-
-      <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item">
-          <a class="nav-link" href="/listings/new">TokTour your home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <i class="fa-solid fa-circle-user fs-4"></i>
-            <% if(currUser) { %>
-              <span class="ms-1 fw-bold">
-                <%= currUser.username %>
-              </span>
+    <!-- RIGHT: Desktop nav items (outside offcanvas so they stay on the right) -->
+    <ul class="navbar-nav ms-auto align-items-center d-none d-md-flex">
+      <li class="nav-item">
+        <a class="nav-link fw-semibold" href="/listings/new" style="color: #222;">TokTour your home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle fw-semibold" href="#" id="navbarDropdownDesktop" role="button"
+          data-bs-toggle="dropdown" aria-expanded="false" style="color: #222;">
+          <i class="fa-solid fa-circle-user fs-4 align-middle"></i>
+          <% if(currUser) { %>
+            <span class="ms-1 fw-bold">
+              <%= currUser.username %>
+            </span>
+            <% } %>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm" aria-labelledby="navbarDropdownDesktop">
+          <% if(!currUser) { %>
+            <li><a class="dropdown-item" href="/signup">Sign up</a></li>
+            <li><a class="dropdown-item" href="/login">Log in</a></li>
+            <% } else { %>
+              <li><a class="dropdown-item" href="/logout">Log out</a></li>
               <% } %>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <% if(!currUser) { %>
-              <li><a class="dropdown-item" href="/signup">Sign up</a></li>
-              <li><a class="dropdown-item" href="/login">Log in</a></li>
-              <% } else { %>
-                <li><a class="dropdown-item" href="/logout">Log out</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- OFFCANVAS: Mobile sliding menu -->
+    <div class="offcanvas-md offcanvas-start d-md-none" tabindex="-1" id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel"
+          style="color: #1a1a2e; display: flex; align-items: center; gap: 10px;">
+          <div class="logo-icon-wrapper" style="width: 30px; height: 30px;">
+            <i class="fa-solid fa-torii-gate" style="font-size: 1rem;"></i>
+          </div>
+          TokTour
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasNavbar" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="/listings" style="color: #000;">Explore</a>
+          </li>
+          <li class="nav-item mt-2">
+            <a class="nav-link fw-semibold" href="/listings/new" style="color: #000;">TokTour your home</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav mt-2">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="navbarDropdownMobile" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false" style="color: #000;">
+              <i class="fa-solid fa-circle-user fs-4 align-middle"></i>
+              <% if(currUser) { %>
+                <span class="ms-1 fw-bold">
+                  <%= currUser.username %>
+                </span>
                 <% } %>
-          </ul>
-        </li>
-      </ul>
+            </a>
+            <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="navbarDropdownMobile">
+              <% if(!currUser) { %>
+                <li><a class="dropdown-item" href="/signup">Sign up</a></li>
+                <li><a class="dropdown-item" href="/login">Log in</a></li>
+                <% } else { %>
+                  <li><a class="dropdown-item" href="/logout">Log out</a></li>
+                  <% } %>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
+
   </div>
 </nav>

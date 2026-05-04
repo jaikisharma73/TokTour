@@ -1029,3 +1029,48 @@ h3 {
         margin-left: 5% !important;
     }
 }
+
+/* 2 Column Mobile Grid for Listings */
+@media (max-width: 576px) {
+    .pro-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+    }
+    
+    .pro-card-body {
+        padding: 0.75rem !important;
+    }
+
+    .pro-card-title {
+        font-size: 1rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    .pro-card-desc {
+        font-size: 0.8rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.5rem !important;
+        -webkit-line-clamp: 1 !important;
+    }
+
+    .pro-card-footer {
+        padding-top: 0.5rem !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.25rem;
+    }
+
+    .pro-card-price {
+        font-size: 0.95rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    .pro-card-price span {
+        font-size: 0.75rem !important;
+    }
+
+    .pro-card-footer > div:last-child {
+        font-size: 0.75rem !important;
+        margin-top: 0.25rem;
+    }
+}

@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const store = MongoStore.create({
     mongoUrl: dbURL,
-    crypto: { secret: "mysupersecretcode" },
+    crypto: { secret: process.env.SECRET },
     touchAfter: 24 * 60 * 60,
 });
 
@@ -53,7 +53,7 @@ store.on("error", () => {
 
 const sessionOptions = {
     store,
-    secret: "mysupersecretcode",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -62,11 +62,6 @@ const sessionOptions = {
         httpOnly: true,
     }
 };
-
-// app.get("/", (req, res) => {
-// //     res.send("Hi i am here");
-// // })
-
 
 
 app.use(session(sessionOptions));
@@ -111,6 +106,10 @@ app.use((err, req, res, next) => {
     // res.status(statusCode).send(message)
 });
 
-app.listen(8080, () => {
-    console.log("Server is listening to port 8080");
-});
+if (process.env.NODE_ENV !== "production") {
+    app.listen(8080, () => {
+        console.log("Server is listening to port 8080");
+    });
+}
+
+module.exports = app;

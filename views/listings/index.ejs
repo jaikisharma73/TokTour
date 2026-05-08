@@ -268,6 +268,18 @@
           <div class="pro-card-img-wrapper">
             <img src="<%= listing.image.url %>" class="pro-card-img" alt="Listing Image" />
             <div class="pro-card-overlay"></div>
+            
+            <% if(listing.likes && listing.likes.length > 0) { %>
+              <div class="like-count" id="count-<%= listing._id %>"><%= listing.likes.length %></div>
+            <% } else { %>
+              <div class="like-count" id="count-<%= listing._id %>" style="display: none;">0</div>
+            <% } %>
+
+            <button class="like-btn <%= (currUser && listing.likes && listing.likes.includes(currUser._id)) ? 'liked' : '' %>" 
+                    data-id="<%= listing._id %>"
+                    onclick="toggleLike(event, '<%= listing._id %>')">
+              <i class="<%= (currUser && listing.likes && listing.likes.includes(currUser._id)) ? 'fa-solid fa-heart' : 'fa-regular fa-heart' %>"></i>
+            </button>
           </div>
 
           <div class="pro-card-body">
@@ -321,5 +333,4 @@
         }
       }
     });
-
   </script>

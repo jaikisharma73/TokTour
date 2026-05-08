@@ -103,3 +103,23 @@ module.exports.deleteListing = async (req, res) => {
     res.redirect("/listings");
 }
 
+module.exports.toggleLike = async (req, res) => {
+    let { id } = req.params;
+    let listing = await Listing.findById(id);
+    if (!listing) {
+        return res.status(404).json({ success: false, message: "Listing not found" });
+    }
+
+    let userIndex = listing.likes.indexOf(req.user._id);
+    let liked = false;
+    if (userIndex === -1) {
+        listing.likes.push(req.user._id);
+        liked = true;
+    } else {
+        listing.likes.splice(userIndex, 1);
+        liked = false;
+    }
+    await listing.save();
+    res.json({ success: true, liked: liked, count: listing.likes.length });
+}
+

@@ -56,5 +56,66 @@
       heroBtn.style.boxShadow = ''
     })
   }
+  
+  // === Toggle Like Functionality ===
+  window.toggleLike = async (event, listingId) => {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    
+    try {
+      const response = await fetch(`/listings/${listingId}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.redirected) {
+        window.location.href = response.url;
+        return;
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        const btns = document.querySelectorAll(`.like-btn[data-id="${listingId}"]`);
+        const countDivs = document.querySelectorAll(`[id="count-${listingId}"]`);
+
+        btns.forEach(btn => {
+          const icon = btn.querySelector('i');
+          if (data.liked) {
+            btn.classList.add('liked');
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid');
+          } else {
+            btn.classList.remove('liked');
+            icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
+          }
+        });
+
+        countDivs.forEach(countDiv => {
+          if (data.count > 0) {
+            countDiv.innerText = data.count;
+            countDiv.style.display = 'block';
+          } else {
+            countDiv.style.display = 'none';
+          }
+        });
+      } else {
+        if (response.status === 401) {
+          window.location.href = "/login";
+        }
+      }
+    } catch (err) {
+      console.error("Error liking listing:", err);
+      // If we get an error, it might be because the response wasn't JSON (like a redirect to login)
+      // but fetch doesn't follow redirects for POST by default in some cases or the response might be HTML
+      if (err.message.includes("Unexpected token")) {
+          window.location.href = "/login";
+      }
+    }
+  };
 
 })()

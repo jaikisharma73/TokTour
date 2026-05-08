@@ -1113,3 +1113,50 @@ h3 {
         border-radius: 0 !important;
     }
 }
+
+/* Like Button Styles */
+.like-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.like-btn:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+.like-btn i {
+    font-size: 1.1rem;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.like-btn.liked i {
+    color: #fe424d;
+}
+
+.like-count {
+    position: absolute;
+    top: 1rem;
+    right: 3.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    z-index: 20;
+    backdrop-filter: blur(4px);
+}

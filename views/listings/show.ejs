@@ -4,9 +4,23 @@
         <div class="row gx-5 mb-5 mt-4">
             <!-- Left side: Image -->
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="pro-image-wrapper mb-3" style="height: 450px; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); background: #f8f9fa;">
+                <div class="pro-image-wrapper mb-3" style="height: 450px; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); background: #f8f9fa; position: relative;">
                     <img src="<%= listing.image.url %>" class="pro-image" alt="Listing Image"
                         style="height: 100%; width: 100%; object-fit: cover;">
+                    
+                    <!-- Like Button on Show Page -->
+                    <% if(listing.likes && listing.likes.length > 0) { %>
+                        <div class="like-count" id="count-<%= listing._id %>" style="top: 1.5rem; right: 4.5rem; padding: 4px 12px; font-size: 0.9rem;"><%= listing.likes.length %></div>
+                    <% } else { %>
+                        <div class="like-count" id="count-<%= listing._id %>" style="display: none; top: 1.5rem; right: 4.5rem; padding: 4px 12px; font-size: 0.9rem;">0</div>
+                    <% } %>
+
+                    <button class="like-btn <%= (currUser && listing.likes && listing.likes.includes(currUser._id)) ? 'liked' : '' %>" 
+                            style="top: 1.5rem; right: 1.5rem; width: 40px; height: 40px;"
+                            data-id="<%= listing._id %>"
+                            onclick="toggleLike(event, '<%= listing._id %>')">
+                        <i class="<%= (currUser && listing.likes && listing.likes.includes(currUser._id)) ? 'fa-solid fa-heart' : 'fa-regular fa-heart' %>" style="font-size: 1.3rem;"></i>
+                    </button>
                 </div>
 
                 <!-- Hosted By and Controls -->

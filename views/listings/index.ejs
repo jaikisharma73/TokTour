@@ -144,59 +144,64 @@
 
   <!-- Hero Section -->
   <div class="hero-section" style="
-    background: linear-gradient(135deg, rgba(254,66,77,0.3), rgba(140, 25, 25, 0.55)), 
-    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80') center/cover no-repeat;
-    border-radius: 24px;
-    padding: 3rem 2rem;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.5rem;
+    padding: 5rem 2rem;
     margin-bottom: 2rem;
     margin-top: 1rem;
     color: white;
     text-align: center;
-    position: relative;
-    overflow: hidden;
 ">
-    <div style="position: relative; z-index: 2;">
-      <h1
-        style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">
-        Find your next <span style="text-decoration: underline wavy; text-underline-offset: 8px;">adventure</span>
-      </h1>
-      <p style="font-size: 1.1rem; opacity: 0.95; margin-bottom: 2rem; font-weight: 300;">
-        Discover unique stays and experiences around the world
-      </p>
-      <form action="/listings" method="GET" class="hero-search-form" style="
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            justify-content: center;
-            max-width: 700px;
-            margin: 0 auto;
-        ">
-        <input type="text" name="search" placeholder="Where are you going?" style="
-                flex: 1;
-                min-width: 200px;
-                padding: 0.9rem 1.5rem;
-                border: none;
-                border-radius: 50px;
-                font-size: 0.95rem;
-                outline: none;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            " />
-        <button type="submit" style="
-                padding: 0.9rem 2rem;
-                background: #1a1a2e;
-                color: white;
-                border: none;
-                border-radius: 50px;
-                font-weight: 700;
-                font-size: 0.95rem;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            ">
-          <i class="fa-solid fa-magnifying-glass me-2"></i>Explore Now
-        </button>
-      </form>
-    </div>
+    <h1
+      style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">
+      Find your next <span style="text-decoration: underline wavy; text-underline-offset: 8px;">adventure</span>
+    </h1>
+    <p style="font-size: 1.1rem; opacity: 0.95; margin-bottom: 2rem; font-weight: 300;">
+      Discover unique stays and experiences around the world
+    </p>
+    <form action="/listings" method="GET" class="hero-search-form" style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          justify-content: center;
+          max-width: 700px;
+          margin: 0 auto;
+      ">
+      <input type="text" name="search" placeholder="Where are you going?" style="
+    flex: 1;
+    min-width: 200px;
+    padding: 0.9rem 1.5rem;
+    
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  " />
+      <button type="submit" style="
+              padding: 0.9rem 2rem;
+              background: #b81919;
+              color: white;
+              border: none;
+              border-radius: 50px;
+              font-weight: 700;
+              font-size: 0.95rem;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+          ">
+        <i class="fa-solid fa-magnifying-glass me-2"></i>Explore Now
+      </button>
+    </form>
   </div>
 
 
@@ -204,41 +209,29 @@
     <div class="filters-wrapper">
       <button id="slide-left" class="slide-btn"><i class="fa-solid fa-angle-left"></i></button>
       <div id="filters">
-        <% 
-        const filtersList = [
-          { name: "Trending", icon: "fa-fire" },
-          { name: "Rooms", icon: "fa-bed" },
-          { name: "City", icon: "fa-tree-city" },
-          { name: "Mountains", icon: "fa-mountain" },
-          { name: "SwimmingPool", icon: "fa-swimmer" },
-          { name: "Castles", icon: "fa-brands fa-fort-awesome" },
-          { name: "Camping", icon: "fa-campground" },
-          { name: "Farms", icon: "fa-cow" },
-          { name: "Arctic", icon: "fa-snowflake" },
-          { name: "Domes", icon: "fa-igloo" },
-          { name: "Boats", icon: "fa-ship" },
-          { name: "Parks", icon: "fa-tree" },
-          { name: "Skiing", icon: "fa-person-skiing" },
-          { name: "Tropical", icon: "fa-umbrella-beach" },
-          { name: "Tiny Homes", icon: "fa-house-chimney-window" },
-          { name: "Top Views", icon: "fa-mountain-sun" },
-          { name: "Lakefront", icon: "fa-water" },
-          { name: "Historical", icon: "fa-landmark" },
-          { name: "B&Bs", icon: "fa-mug-hot" },
-          { name: "Glamping", icon: "fa-tents" },
-          { name: "Desert", icon: "fa-sun" }
-        ];
-        %>
-        <a href="/listings" class="filter <%= currentFilter === '' ? 'active' : '' %>" style="text-decoration: none; color: inherit;">
-          <div><i class="fa-solid fa-border-all"></i></div>
-          <p>All</p>
-        </a>
-        <% for(let f of filtersList) { %>
-          <a href="/listings?filter=<%= f.name %>" class="filter <%= currentFilter === f.name ? 'active' : '' %>" style="text-decoration: none; color: inherit;">
-            <div><i class="<%= f.icon.includes('fa-brands') ? f.icon : 'fa-solid ' + f.icon %>"></i></div>
-            <p><%= f.name %></p>
+        <% const filtersList=[ { name: "Trending" , icon: "fa-fire" }, { name: "Rooms" , icon: "fa-bed" }, {
+          name: "City" , icon: "fa-tree-city" }, { name: "Mountains" , icon: "fa-mountain" }, { name: "SwimmingPool" ,
+          icon: "fa-swimmer" }, { name: "Castles" , icon: "fa-brands fa-fort-awesome" }, { name: "Camping" ,
+          icon: "fa-campground" }, { name: "Farms" , icon: "fa-cow" }, { name: "Arctic" , icon: "fa-snowflake" }, {
+          name: "Domes" , icon: "fa-igloo" }, { name: "Boats" , icon: "fa-ship" }, { name: "Parks" , icon: "fa-tree" },
+          { name: "Skiing" , icon: "fa-person-skiing" }, { name: "Tropical" , icon: "fa-umbrella-beach" }, {
+          name: "Tiny Homes" , icon: "fa-house-chimney-window" }, { name: "Top Views" , icon: "fa-mountain-sun" }, {
+          name: "Lakefront" , icon: "fa-water" }, { name: "Historical" , icon: "fa-landmark" }, { name: "B&Bs" ,
+          icon: "fa-mug-hot" }, { name: "Glamping" , icon: "fa-tents" }, { name: "Desert" , icon: "fa-sun" } ]; %>
+          <a href="/listings" class="filter <%= currentFilter === '' ? 'active' : '' %>"
+            style="text-decoration: none; color: inherit;">
+            <div><i class="fa-solid fa-border-all"></i></div>
+            <p>All</p>
           </a>
-        <% } %>
+          <% for(let f of filtersList) { %>
+            <a href="/listings?filter=<%= f.name %>" class="filter <%= currentFilter === f.name ? 'active' : '' %>"
+              style="text-decoration: none; color: inherit;">
+              <div><i class="<%= f.icon.includes('fa-brands') ? f.icon : 'fa-solid ' + f.icon %>"></i></div>
+              <p>
+                <%= f.name %>
+              </p>
+            </a>
+            <% } %>
       </div>
       <button id="slide-right" class="slide-btn"><i class="fa-solid fa-angle-right"></i></button>
     </div>
@@ -253,56 +246,60 @@
   <div class="pro-index-container mt-1">
     <!-- <h1 class="pro-page-title">Explore Our Top Listings ..</h1> -->
     <div class="pro-grid">
-      <% if(allListings.length === 0) { %>
+      <% if(allListings.length===0) { %>
         <div class="col-12" style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem;">
           <i class="fa-solid fa-magnifying-glass mb-3" style="font-size: 3rem; color: #ccc;"></i>
           <h3 style="color: #666;">No listings found!</h3>
           <p style="color: #888;">Try selecting a different filter or searching for something else.</p>
           <a href="/listings" class="btn pro-btn pro-btn-primary mt-2">View All Stays</a>
         </div>
-      <% } else { %>
-        <% for(let listing of allListings) { %>
-        <div class="pro-card">
-          <a href="/listings/<%= listing._id %>" class="pro-card-link"></a>
+        <% } else { %>
+          <% for(let listing of allListings) { %>
+            <div class="pro-card ">
+              <a href="/listings/<%= listing._id %>" class="pro-card-link"></a>
 
-          <div class="pro-card-img-wrapper">
-            <img src="<%= listing.image.url %>" class="pro-card-img" alt="Listing Image" />
-            <div class="pro-card-overlay"></div>
-            
-            <% if(listing.likes && listing.likes.length > 0) { %>
-              <div class="like-count" id="count-<%= listing._id %>"><%= listing.likes.length %></div>
-            <% } else { %>
-              <div class="like-count" id="count-<%= listing._id %>" style="display: none;">0</div>
-            <% } %>
+              <div class="pro-card-img-wrapper">
+                <img src="<%= listing.image.url %>" class="pro-card-img" alt="Listing Image" />
+                <div class="pro-card-overlay"></div>
 
-            <button class="like-btn <%= (currUser && listing.likes && listing.likes.includes(currUser._id)) ? 'liked' : '' %>" 
-                    data-id="<%= listing._id %>"
-                    onclick="toggleLike(event, '<%= listing._id %>')">
-              <i class="<%= (currUser && listing.likes && listing.likes.includes(currUser._id)) ? 'fa-solid fa-heart' : 'fa-regular fa-heart' %>"></i>
-            </button>
-          </div>
+                <% if(listing.likes && listing.likes.length> 0) { %>
+                  <div class="like-count" id="count-<%= listing._id %>">
+                    <%= listing.likes.length %>
+                  </div>
+                  <% } else { %>
+                    <div class="like-count" id="count-<%= listing._id %>" style="display: none;">0</div>
+                    <% } %>
 
-          <div class="pro-card-body">
-            <h5 class="pro-card-title">
-              <%= listing.title %>
-            </h5>
-            <p class="pro-card-desc">
-              <%= listing.description %>
-            </p>
-
-            <div class="pro-card-footer">
-              <div class="pro-card-price">
-                &#8377; <%= (listing.price !==null && listing.price !==undefined) ?
-                  listing.price.toLocaleString("en-IN") : "N/A" %> <span>/Night <i class="tax-info">+8% GST</i></span>
+                      <button
+                        class="like-btn <%= (currUser && listing.likes && listing.likes.includes(currUser._id)) ? 'liked' : '' %>"
+                        data-id="<%= listing._id %>" onclick="toggleLike(event, '<%= listing._id %>')">
+                        <i
+                          class="<%= (currUser && listing.likes && listing.likes.includes(currUser._id)) ? 'fa-solid fa-heart' : 'fa-regular fa-heart' %>"></i>
+                      </button>
               </div>
-              <div style="color: #1a1a2e; font-size: 0.9rem; font-weight: 600;">
-                View Details <i class="fa-solid fa-arrow-right ms-1" style="color: #fe424d;"></i>
+
+              <div class="pro-card-body">
+                <h5 class="pro-card-title">
+                  <%= listing.title %>
+                </h5>
+                <p class="pro-card-desc">
+                  <%= listing.description %>
+                </p>
+
+                <div class="pro-card-footer">
+                  <div class="pro-card-price">
+                    &#8377; <%= (listing.price !==null && listing.price !==undefined) ?
+                      listing.price.toLocaleString("en-IN") : "N/A" %> <span>/Night <i class="tax-info">+8%
+                          GST</i></span>
+                  </div>
+                  <div style="color: #1a1a2e; font-size: 0.9rem; font-weight: 600;">
+                    View Details <i class="fa-solid fa-arrow-right ms-1" style="color: #fe424d;"></i>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <% } %>
-      <% } %>
+            <% } %>
+              <% } %>
     </div>
   </div>
 
